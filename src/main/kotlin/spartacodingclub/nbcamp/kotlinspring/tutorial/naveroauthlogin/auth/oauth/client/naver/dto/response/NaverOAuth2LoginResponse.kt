@@ -1,10 +1,10 @@
-package spartacodingclub.nbcamp.kotlinspring.tutorial.naveroauthlogin.domain.auth.dto.response
+package spartacodingclub.nbcamp.kotlinspring.tutorial.naveroauthlogin.auth.oauth.client.naver.dto.response
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
-data class NaverLoginAuthResponse(
+data class NaverOAuth2LoginResponse(
     val accessToken: String = "",
     val refreshToken: String = "",
     val tokenType: String = "",
