@@ -34,9 +34,10 @@ class Member (
     var id: Long? = null
 
 
-    fun toSignInResponse() = SignInResponse(
+    fun toSignInResponse(accessToken: String) = SignInResponse(
         id = id,
-        nickname = nickname
+        nickname = nickname,
+        accessToken = accessToken
     )
 
 }

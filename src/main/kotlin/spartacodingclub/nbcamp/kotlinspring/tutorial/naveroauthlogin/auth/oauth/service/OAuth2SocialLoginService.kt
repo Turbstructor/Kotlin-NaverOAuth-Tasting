@@ -11,7 +11,7 @@ class OAuth2SocialLoginService(
 ) {
 
     fun redirectToSocialLogin(provider: OAuth2Provider): String =
-        this.selectClient(provider).let { it.socialLoginUrl() }
+        this.selectClient(provider).socialLoginUrl()
 
     fun getSocialLoginInfo(provider: OAuth2Provider, stateToken: String, authorizationCode: String): SocialLoginInfo =
         this.selectClient(provider).let { client ->

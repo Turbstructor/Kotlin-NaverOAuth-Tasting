@@ -29,8 +29,8 @@ class NaverOAuth2Client(
     private val redirectUrl: String
 ): OAuth2Client {
 
-    private final val PERSONAL_INFO_REQUEST_URL = "https://openapi.naver.com/v1/nid/me"
-    private final val OAUTH_REQUEST_URL = "https://nid.naver.com/oauth2.0"
+    private final val personalInfoRequestUrl = "https://openapi.naver.com/v1/nid/me"
+    private final val oAuthRequestUrl = "https://nid.naver.com/oauth2.0"
 
     private var stateTokens: MutableList<String> = mutableListOf()
 
@@ -42,19 +42,20 @@ class NaverOAuth2Client(
     override fun supports(provider: OAuth2Provider): Boolean = (provider == OAuth2Provider.NAVER)
 
     override fun socialLoginUrl(): String {
-        val stateToken = generateState()
-        stateTokens.add(stateToken)
+        return generateState().let {
+            stateTokens.add(it)
 
-        return "${OAUTH_REQUEST_URL}/authorize?response_type=code" +
-                "&client_id=${clientId}" +
-                "&redirect_uri=${URLEncoder.encode(redirectUrl, "UTF-8")}" +
-                "&state=${stateToken}"
+            "${oAuthRequestUrl}/authorize?response_type=code" +
+                    "&client_id=${clientId}" +
+                    "&redirect_uri=${URLEncoder.encode(redirectUrl, "UTF-8")}" +
+                    "&state=${it}"
+        }
     }
 
     override fun getAccessToken(stateToken: String, authorizationCode: String): String {
         if (!isStateIssued(stateToken)) throw IllegalArgumentException("State forged")
 
-        val requestUrl = "${OAUTH_REQUEST_URL}/token?" +
+        val requestUrl = "${oAuthRequestUrl}/token?" +
                 "grant_type=authorization_code&" +
                 "client_id=${clientId}&client_secret=${clientSecret}&" +
                 "code=${authorizationCode}&state=${stateToken}"
@@ -75,10 +76,10 @@ class NaverOAuth2Client(
 
         val requestHeaders = HttpHeaders()
         requestHeaders.contentType = MediaType.APPLICATION_JSON
-        requestHeaders.set("Authorization", "Bearer ${accessToken}")
+        requestHeaders.set("Authorization", "Bearer $accessToken")
 
         return SocialLoginInfo.from(restClient.get()
-            .uri(PERSONAL_INFO_REQUEST_URL)
+            .uri(personalInfoRequestUrl)
             .header("Authorization", "Bearer $accessToken")
             .retrieve()
             .onStatus(HttpStatusCode::isError) { _, _ -> throw RuntimeException("Failed to query personal info") }
