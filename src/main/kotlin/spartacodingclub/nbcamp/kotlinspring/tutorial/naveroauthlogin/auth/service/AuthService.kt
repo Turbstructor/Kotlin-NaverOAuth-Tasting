@@ -1,4 +1,4 @@
-package spartacodingclub.nbcamp.kotlinspring.tutorial.naveroauthlogin.domain.auth.service
+package spartacodingclub.nbcamp.kotlinspring.tutorial.naveroauthlogin.auth.service
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.beans.factory.annotation.Value
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 import org.springframework.web.client.RestClient
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.servlet.view.RedirectView
-import spartacodingclub.nbcamp.kotlinspring.tutorial.naveroauthlogin.domain.auth.dto.response.NaverLoginAuthResponse
+import spartacodingclub.nbcamp.kotlinspring.tutorial.naveroauthlogin.auth.dto.response.NaverLoginAuthResponse
 import java.math.BigInteger
 import java.net.URI
 import java.net.URLEncoder
@@ -23,13 +23,13 @@ import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 @Service
 class AuthService(
 
-    @Value("\${oauth2.naver.client.id}")
+    @Value("\${naver.application.client.id}")
     private val clientId: String,
 
-    @Value("\${oauth2.naver.client.secret}")
+    @Value("\${naver.application.client.secret}")
     private val clientSecret: String,
 
-    @Value("\${oauth2.naver.redirect_url}")
+    @Value("\${naver.application.redirect_url}")
     private val redirectUrl: String,
 ) {
 
@@ -123,7 +123,7 @@ class AuthService(
             .header("Authorization", "Bearer $accessTokenRequested")
             .retrieve()
             .onStatus(HttpStatusCode::is4xxClientError) { _, response ->
-               "Bro"
+                "Bro"
             }
             .body(String::class.java)
 

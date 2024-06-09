@@ -1,4 +1,4 @@
-package spartacodingclub.nbcamp.kotlinspring.tutorial.naveroauthlogin.domain.auth.controller
+package spartacodingclub.nbcamp.kotlinspring.tutorial.naveroauthlogin.auth.controller
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.servlet.view.RedirectView
-import spartacodingclub.nbcamp.kotlinspring.tutorial.naveroauthlogin.domain.auth.service.AuthService
+import spartacodingclub.nbcamp.kotlinspring.tutorial.naveroauthlogin.auth.service.AuthService
 
 @RequestMapping("/oauth2/naver")
 @RestController

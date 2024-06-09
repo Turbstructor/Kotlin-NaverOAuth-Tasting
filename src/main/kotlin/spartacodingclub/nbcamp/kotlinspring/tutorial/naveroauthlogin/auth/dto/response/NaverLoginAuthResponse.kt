@@ -1,4 +1,4 @@
-package spartacodingclub.nbcamp.kotlinspring.tutorial.naveroauthlogin.domain.auth.dto.response
+package spartacodingclub.nbcamp.kotlinspring.tutorial.naveroauthlogin.auth.dto.response
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies
 import com.fasterxml.jackson.databind.annotation.JsonNaming
