@@ -1,7 +1,6 @@
 package spartacodingclub.nbcamp.kotlinspring.tutorial.naveroauthlogin.domain.member.entity
 
 import jakarta.persistence.*
-import spartacodingclub.nbcamp.kotlinspring.tutorial.naveroauthlogin.auth.dto.response.SignInResponse
 import spartacodingclub.nbcamp.kotlinspring.tutorial.naveroauthlogin.auth.oauth.dto.SocialLoginInfo
 import spartacodingclub.nbcamp.kotlinspring.tutorial.naveroauthlogin.auth.oauth.type.OAuth2Provider
 
@@ -32,12 +31,5 @@ class Member (
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
-
-
-    fun toSignInResponse(accessToken: String) = SignInResponse(
-        id = id,
-        nickname = nickname,
-        accessToken = accessToken
-    )
 
 }

@@ -24,11 +24,11 @@ class JwtUtility(
 
     private val key = Keys.hmacShaKeyFor(secret.toByteArray(StandardCharsets.UTF_8))
 
-    fun generateAccessToken(id: Long): String =
-        generateToken(id, Duration.ofHours(expirationHoursAccess))
+    fun generateAccessToken(id: Long, nickname: String): String =
+        generateToken(id, nickname, Duration.ofHours(expirationHoursAccess))
 
-    private fun generateToken(id: Long, expirationHours: Duration): String =
-        Jwts.claims().add( mapOf("id" to id) ).build().let { claims ->
+    private fun generateToken(id: Long, nickname: String, expirationHours: Duration): String =
+        Jwts.claims().add( mapOf("id" to id, "nickname" to nickname ) ).build().let { claims ->
             LocalDateTime.now().toInstant(ZoneOffset.UTC).let { currentTime ->
                 Jwts.builder()
                     .issuer(issuer).claims(claims)

@@ -15,12 +15,5 @@ class MemberService(
             ?: signUp(socialLoginInfo)
 
     private fun signUp(socialLoginInfo: SocialLoginInfo): Member =
-        memberRepository.save(
-            Member(
-                provider = socialLoginInfo.provider,
-                providerId = socialLoginInfo.id,
-                email = socialLoginInfo.email,
-                nickname = socialLoginInfo.nickname
-            )
-        )
+        memberRepository.save(Member(socialLoginInfo))
 }
