@@ -23,13 +23,13 @@ import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 @Service
 class AuthService(
 
-    @Value("\${naver.application.client.id}")
+    @Value("\${oauth2.naver.client.id}")
     private val clientId: String,
 
-    @Value("\${naver.application.client.secret}")
+    @Value("\${oauth2.naver.client.secret}")
     private val clientSecret: String,
 
-    @Value("\${naver.application.redirect_url}")
+    @Value("\${oauth2.naver.redirect_url}")
     private val redirectUrl: String,
 ) {
 
