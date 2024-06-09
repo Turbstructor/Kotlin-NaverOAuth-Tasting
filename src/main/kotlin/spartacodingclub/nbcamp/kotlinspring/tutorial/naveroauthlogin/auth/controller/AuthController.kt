@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.servlet.view.RedirectView
+import spartacodingclub.nbcamp.kotlinspring.tutorial.naveroauthlogin.auth.dto.response.SignInResponse
 import spartacodingclub.nbcamp.kotlinspring.tutorial.naveroauthlogin.auth.oauth.service.OAuth2SocialLoginService
 import spartacodingclub.nbcamp.kotlinspring.tutorial.naveroauthlogin.auth.oauth.type.OAuth2Provider
 import spartacodingclub.nbcamp.kotlinspring.tutorial.naveroauthlogin.auth.service.AuthService
@@ -23,10 +24,8 @@ class AuthController(
     fun initSocialLogin(@PathVariable provider: OAuth2Provider) = RedirectView(oAuth2SocialLoginService.redirectToSocialLogin(provider))
 
     @GetMapping("/login/callback")
-    fun callback(@PathVariable provider: OAuth2Provider, @RequestParam code: String, @RequestParam state: String): ResponseEntity<String> =
+    fun callback(@PathVariable provider: OAuth2Provider, @RequestParam code: String, @RequestParam state: String): ResponseEntity<SignInResponse> =
         ResponseEntity.status(HttpStatus.OK)
             .body(authService.signIn(provider, state, code))
-
-    @GetMapping
-    fun bruh(@PathVariable provider: OAuth2Provider): String = "Bruh"
+    
 }
